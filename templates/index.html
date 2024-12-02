@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>House Price Prediction</title>
+</head>
+<body>
+    <h1>House Price Prediction</h1>
+
+    <form action="/predict" method="POST">
+        <label for="Location">Location:</label>
+        <select name="Location" required>
+            {% for location in locations %}
+                <option value="{{ location }}">{{ location }}</option>
+            {% endfor %}
+        </select>
+        <br><br>
+
+        <label for="Appartment_type">Apartment Type:</label>
+        <select name="Appartment_type" required>
+            {% for apartment_type in apartment_types %}
+                <option value="{{ apartment_type }}">{{ apartment_type }}</option>
+            {% endfor %}
+        </select>
+        <br><br>
+
+        <label for="Area">Area (in Sq Ft):</label>
+        <input type="number" name="Area" required>
+        <br><br>
+
+        <label for="Price_per_sq_ft">Price per Sq Ft:</label>
+        <input type="number" name="Price_per_sq_ft" required>
+        <br><br>
+
+        <button type="submit">Predict Price</button>
+    </form>
+
+    {% if predicted_price %}
+        <h3>Predicted Price: ₹{{ predicted_price | round(2) }}</h3>
+    {% endif %}
+</body>
+</html>
